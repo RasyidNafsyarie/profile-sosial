@@ -1,790 +1,457 @@
 <!doctype html>
 <html lang="id">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Divisi Sosial — Himpunan</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Departemen Sosial — HMIF</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="assets/sosial.png">
+  <link rel="icon" type="image/png" href="assets/sosial.png" />
 
   <style>
-    :root {
-      --bg: #f7f9fb;
-      --card: #ffffff;
-      --muted: #6b7280;
-      --accent: #ecbe1d;
-      /* main accent (user chose light theme) */
-      --accent-2: #58D2FF;
-      --text: #0f172a;
-      --radius: 14px;
-      --hero-img: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7a6f8c4b1ef2b6b4a0b9e3d1f7f9c3a6');
-      --container: 1100px;
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: var(--text);
-      background: var(--bg);
-       scrollbar-width: none;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none
-    }
-
-    header {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 64px;
+    /* minimal custom styles for slider animation & small tweaks */
+    .slider-track {
       display: flex;
-      align-items: center;
-      padding: 0 20px;
-      z-index: 50;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.04)
+      gap: 0;
+      width: max-content;
+      will-change: transform;
+      animation: scroll-linear 22s linear infinite;
     }
-
-    .nav {
-      max-width: var(--container);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%
+    .slide-item { flex: 0 0 auto; width: 100vw; height: 70vh; object-fit: cover; }
+    @keyframes scroll-linear {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700
-    }
-
-    .brand .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700
-    }
-
-    nav ul {
-      display: flex;
-      gap: 18px;
-      list-style: none;
-      margin: 0;
-      padding: 0
-    }
-
-    nav ul li a {
-      font-weight: 600;
-      color: var(--muted);
-      font-size: 14px
-    }
-
-    main {
-      padding-top: 84px
-    }
-
-    /* HERO */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
-      background: #fff;
-    }
-
-    .hero-images {
-      display: flex;
-      width: 100%;
-      height: 50vh;
-      overflow: hidden;
-    }
-
-    .hero-images img {
-      width: 33.34%;
-      object-fit: cover;
-    }
-
-    .hero {
-      position: relative;
-      height: 70vh;
-      overflow: hidden;
-    }
-
-    .hero-slider {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .slide-track {
-      display: flex;
-      width: calc(300px * 6);
-      /* 3 gambar × 2 duplikat */
-      animation: scroll 22s linear infinite;
-    }
-
-    .slide {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      flex-shrink: 0;
-      width: 33.33vw;
-      /* agar 3 gambar pas memenuhi layar */
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* overlay gelap */
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    /* Text di hero */
-    .hero-text {
-      position: absolute;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: white;
-    }
-
-    .hero-text h1 {
-      font-size: 48px;
-      margin: 0;
-    }
-
-    .hero-text p {
-      margin-top: 8px;
-      font-size: 18px;
-      opacity: 0.9;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 60px;
-      display: flex;
-      gap: 48px;
-      align-items: center
-    }
-
-    .hero-left {
-      flex: 1;
-      color: white
-    }
-
-    .hero-left h1 {
-      font-size: 44px;
-      margin: 0 0 10px;
-      letter-spacing: -0.5px
-    }
-
-    .hero-left p {
-      margin: 0 0 18px;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 18px
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 12px
-    }
-
-    .btn {
-      background: var(--accent);
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      border: 0;
-      color: white
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: white
-    }
-
-    .hero-right {
-      width: 360px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px
-    }
-
-    .hero-card {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 14px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06)
-    }
-
-    .hero-card h4 {
-      margin: 0 0 6px;
-      font-size: 16px
-    }
-
-    .hero-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px
-    }
-
-    /* container */
-    .container {
-      max-width: var(--container);
-      margin: 48px auto;
-      padding: 0 20px
-    }
-
-    /* profiles */
-    .profiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 18px
-    }
-
-    .profile {
-      background: var(--card);
-      padding: 14px;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-      text-align: center
-    }
-
-    .profile img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid white;
-      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06)
-    }
-
-    .profile h5 {
-      margin: 0;
-      font-size: 15px
-    }
-
-    .profile p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px
-    }
-
-    .profiles-single {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-
-    /* program cards */
-    /* 4 Item — rata penuh */
-    .program-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      /* biar row kedua otomatis center */
-      gap: 20px;
-    }
-
-    .program-grid .card {
-      flex: 0 0 calc(25% - 20px);
-      /* 4 kolom */
-    }
-
-    /* --- Untuk baris kedua yang isinya cuma 3 item --- */
-    .program-grid .card:nth-last-child(3):first-child,
-    .program-grid .card:nth-last-child(3):nth-child(2),
-    .program-grid .card:nth-last-child(3):nth-child(3) {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-
-
-    .card {
-      background: var(--card);
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
-      border: 1px solid rgba(15, 23, 42, 0.04);
-      display: flex;
-      flex-direction: column;
-      gap: 12px
-    }
-
-    .card h3 {
-      margin: 0
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px
-    }
-
-    .card .tag {
-      font-weight: 700;
-      color: var(--text);
-      font-size: 13px
-    }
-
-    .card button {
-      margin-top: auto;
-      align-self: flex-start
-    }
-
-    /* details */
-    .program-detail {
-      margin-top: 36px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
-      padding: 28px;
-      border-radius: 12px;
-      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.04);
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 24px;
-      align-items: start
-    }
-
-    .program-detail .media {
-      height: 240px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #eee
-    }
-
-    .program-detail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover
-    }
-
-    .program-detail h2 {
-      margin: 0 0 10px
-    }
-
-    .program-detail p {
-      color: var(--muted)
-    }
-
-    .small {
-      font-size: 14px;
-      color: var(--muted)
-    }
-
-    .color-links {
-      color: var(--accent)
-    }
-
-    /* footer */
-    footer {
-      padding: 28px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px
-    }
-
-    .color-links {
-      color: #ecbe1d;
-    }
-
-    /* reveal animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: all .6s cubic-bezier(.2, .9, .3, 1)
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: none
-    }
-
-    /* responsive */
-    @media (max-width:900px) {
-      .hero-content {
-        padding: 36px;
-        flex-direction: column;
-        align-items: flex-start
-      }
-
-      .hero-right {
-        width: 100%
-      }
-
-      .program-detail {
-        grid-template-columns: 1fr
-      }
-    }
-
-    @media (max-width:420px) {
-      .hero-left h1 {
-        font-size: 28px
-      }
-    }
-
-    /* utility */
-    .muted {
-      color: var(--muted)
-    }
-
-    .center {
-      text-align: center
-    }
+    /* make the hero images rounded and cover full width without sidespace */
+    .hero-wrap { overflow: hidden; position: relative; }
+    /* hide native scrollbar but keep scroll ability (for platforms that show it) */
+    ::-webkit-scrollbar { height: 0; width: 0; }
   </style>
 </head>
+<body class="antialiased text-slate-900 bg-slate-50">
 
-<body>
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <img src="assets/sosial.png" class="logo" alt="Logo Sosial">
-        <div>Departemen Sosial</div>
+  <!-- NAVBAR -->
+  <header class="fixed w-full z-40 top-0">
+    <div class="backdrop-blur bg-white/70 border-b border-slate-200">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-3">
+            <img src="assets/sosial.png" alt="Logo" class="w-10 h-10 rounded-md object-cover">
+            <div class="text-slate-900 font-semibold">Departemen Sosial</div>
+          </div>
+
+          <nav>
+            <ul class="flex items-center gap-6 text-sm text-slate-600">
+              <li><a href="#profil" class="hover:text-slate-900">Profil</a></li>
+              <li><a href="#program" class="hover:text-slate-900">Program Kerja</a></li>
+              <li><a href="#details" class="hover:text-slate-900">Detail</a></li>
+              <li><a href="#contact" class="hover:text-slate-900">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <nav>
-        <ul>
-          <li><a href="#profil">Profil</a></li>
-          <li><a href="#program">Program Kerja</a></li>
-          <li><a href="#details">Detail</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
-  <main>
-    <!-- HERO/COVER -->
-    <section class="hero">
-      <div class="hero-slider">
-        <div class="slide-track">
-          <img src="assets/hero-1.JPG" class="slide">
-          <img src="assets/hero-2.jpg" class="slide">
-          <img src="assets/hero-3.jpg" class="slide">
+  <main class="pt-20">
 
-          <!-- Duplikat untuk loop -->
-          <img src="assets/hero-1.JPG" class="slide">
-          <img src="assets/hero-2.jpg" class="slide">
-          <img src="assets/hero-3.jpg" class="slide">
+    <!-- HERO: full-width looping horizontal slider (3 images duplicated for looping) -->
+    <section class="hero-wrap relative">
+      <div class="relative w-full">
+        <div class="absolute inset-0">
+          <div class="slider-track">
+            <img src="assets/hero-1.JPG" class="slide-item object-contain bg-black">
+            <img src="assets/hero-2.jpg" class="slide-item object-contain bg-black">
+            <img src="assets/hero-3.jpg" class="slide-item object-contain bg-black">
+          </div>
+        </div>
+
+        <!-- overlay -->
+        <div class="absolute inset-0 bg-black/35"></div>
+
+        <!-- hero content -->
+        <div class="relative z-10 max-w-6xl mx-auto px-6 py-28 text-center">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-md">
+            Departemen Sosial
+          </h1>
+          <p class="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+            Himpunan Mahasiswa Teknik Informatika — Program Kerja & Profil Departemen. Bergerak bersama untuk memberikan dampak nyata.
+          </p>
+
+          <div class="mt-8 flex items-center justify-center gap-4">
+            <a href="#profil" class="inline-flex items-center gap-2 bg-white text-yellow-500 px-5 py-3 rounded-xl font-semibold shadow hover:translate-y-[-2px] transition">
+              <i class="fa-solid fa-users"></i> Lihat Profil
+            </a>
+            <a href="#program" class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white px-5 py-3 rounded-xl hover:bg-white/20 transition">
+              <i class="fa-solid fa-list"></i> Program Kerja
+            </a>
+          </div>
         </div>
       </div>
-      <div class="hero-content">
-        <h1>Departemen Sosial</h1>
-        <p>Himpunan Mahasiswa Teknik Informatika — Program Kerja & Profil Departemen</p>
+    </section>
+
+    <!-- Profil -->
+    <section id="profil" class="max-w-6xl mx-auto px-6 py-16">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold">Profil Anggota</h2>
+        <p class="text-slate-500 mt-2">Anggota Departemen Sosial</p>
+      </div>
+
+      <!-- Koordinator at top -->
+      <div class="flex justify-center mb-8">
+        <div class="bg-white rounded-2xl shadow-lg p-6 w-full sm:w-96 flex flex-col items-center">
+          <img src="assets/rasyid.jpg" alt="Rasyid" class="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md">
+          <h3 class="mt-4 font-semibold text-lg">Rasyid Nafsyarie</h3>
+          <p class="text-sm text-slate-500">Koordinator Sosial</p>
+        </div>
+      </div>
+
+      <!-- anggota grid (flex so second row centered automatically) -->
+      <div class="flex flex-wrap justify-center gap-6">
+        <!-- each card responsive: full / sm:1/2 / md:1/3 / lg:1/4 -->
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col items-center text-center">
+          <img src="assets/rakha.jpg" alt="Rakha" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-sm">
+          <h5 class="mt-3 font-medium">Rakha Yudhistira</h5>
+          <p class="text-sm text-slate-500">Staff Departemen Sosial</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col items-center text-center">
+          <img src="assets/chilya.jpg" alt="Chilya" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-sm">
+          <h5 class="mt-3 font-medium">Chilya Fadhilatin Nisa</h5>
+          <p class="text-sm text-slate-500">Staff Departemen Sosial</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col items-center text-center">
+          <img src="assets/maruf.jpg" alt="Maruf" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-sm">
+          <h5 class="mt-3 font-medium">Maruf Sarifudin</h5>
+          <p class="text-sm text-slate-500">Staff Departemen Sosial</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col items-center text-center">
+          <img src="assets/fachri.jpg" alt="Fachri" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-sm">
+          <h5 class="mt-3 font-medium">Muhammad Fachri Auravyano</h5>
+          <p class="text-sm text-slate-500">Staff Departemen Sosial</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col items-center text-center">
+          <img src="assets/chila.jpg" alt="Sheila" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-sm">
+          <h5 class="mt-3 font-medium">Sheila Stephanie Anindya</h5>
+          <p class="text-sm text-slate-500">Staff Departemen Sosial</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col items-center text-center">
+          <img src="assets/sinta.jpg" alt="Sinta" class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-sm">
+          <h5 class="mt-3 font-medium">Sinta Sintiani</h5>
+          <p class="text-sm text-slate-500">Staff Departemen Sosial</p>
+        </div>
       </div>
     </section>
+
+    <!-- Program Kerja -->
+    <section id="program" class="max-w-6xl mx-auto px-6 pb-16">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold">Program Kerja</h2>
+        <p class="text-slate-500 mt-2">Ringkasan program kerja Departemen Sosial</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <!-- width: lg->1/4, md->1/3, sm->1/2, xs->full -->
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Donor Darah</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Menjalin kerja sama dengan PMI dan mengadakan kegiatan donor darah rutin.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('donor')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Pengabdian Masyarakat</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Penyuluhan, renovasi fasilitas, dan pemberdayaan ekonomi.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('pengabdian')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Ruang Tengah x Temu Alumni</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Kolaborasi, diskusi, dan temu alumni untuk jaringan & mentorship.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('ruangtengah')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Jumat Berbagi</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Berbagi paket sembako kepada warga sekitar.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('jumat')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Sosial Mengajar</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Program pengajaran untuk anak-anak kurang mampu.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('mengajar')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Ultras Informatika</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Meneruskan semangat Ultras di komunitas Informatika.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('ultras')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow p-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <h3 class="text-lg font-semibold text-center">Forum Ketua</h3>
+          <p class="mt-3 text-sm text-slate-600 text-center">Mengumpulkan aspirasi dari ketua kelas seluruh angkatan.</p>
+          <div class="mt-4 text-center">
+            <button onclick="goToDetail('ketua')" class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-xl shadow hover:opacity-90 transition">
+              Lihat Detail
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Details -->
+    <section id="details" class="max-w-6xl mx-auto px-6 pb-16">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold">Detail Program Kerja</h2>
+        <p class="text-slate-500 mt-2">Penjelasan lengkap tiap program & penanggung jawab</p>
+      </div>
+
+      <div class="flex flex-col gap-8">
+        <article id="donor" class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold">Donor Darah</h3>
+            <p class="text-sm text-slate-500 mt-2"><strong>Tujuan:</strong> Menyediakan stok darah yang aman & membentuk kepedulian donor dari civitas.</p>
+            <p class="mt-3 text-slate-600">Donor darah rutin bekerja sama dengan PMI — pendaftaran, pemeriksaan kesehatan dasar, dan pelaksanaan di lokasi kampus.</p>
+            <p class="mt-3"><strong>Ketua Pelaksana:</strong> Chilya Fadhilatin Nisa</p>
+          </div>
+          <div class="h-56 rounded-lg overflow-hidden">
+            <img src="assets/donor.jpg" alt="Donor" class="w-full h-full object-cover">
+          </div>
+        </article>
+
+        <article id="pengabdian" class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold">Pengabdian Masyarakat</h3>
+            <p class="text-sm text-slate-500 mt-2"><strong>Tujuan:</strong> Melaksanakan kegiatan yang mendukung kesejahteraan masyarakat setempat.</p>
+            <p class="mt-3 text-slate-600">Penyuluhan kesehatan, kerja bakti, renovasi fasilitas umum, dan pemberdayaan ekonomi.</p>
+            <p class="mt-3"><strong>Ketua Pelaksana:</strong> Sheila Stephanie Anindya</p>
+          </div>
+          <div class="h-56 rounded-lg overflow-hidden">
+            <img src="assets/pengmas.jpg" alt="Pengabdian" class="w-full h-full object-cover">
+          </div>
+        </article>
+
+        <article id="ruangtengah" class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold">Ruang Tengah x Temu Alumni</h3>
+            <p class="text-sm text-slate-500 mt-2"><strong>Tujuan:</strong> Menjalin relasi antara angkatan dan alumni melalui sesi diskusi & workshop.</p>
+            <p class="mt-3 text-slate-600">Event gabungan yang menghadirkan alumni untuk berbagi pengalaman, mentorship, dan peluang kolaborasi.</p>
+            <p class="mt-3"><strong>Ketua Pelaksana:</strong> Maruf Sarifudin</p>
+          </div>
+          <div class="h-56 rounded-lg overflow-hidden">
+            <img src="assets/forum.jpg" alt="Ruang Tengah" class="w-full h-full object-cover">
+          </div>
+        </article>
+
+        <article id="jumat" class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold">Jumat Berbagi</h3>
+            <p class="text-sm text-slate-500 mt-2"><strong>Tujuan:</strong> Menyediakan bantuan cepat kepada warga yang membutuhkan setiap periode tertentu.</p>
+            <p class="mt-3 text-slate-600">Pembagian paket sembako, obat-obatan ringan, dan kebutuhan harian bersama komunitas lokal.</p>
+            <p class="mt-3"><strong>Ketua Pelaksana:</strong> -</p>
+          </div>
+          <div class="h-56 rounded-lg overflow-hidden">
+            <img src="assets/berbagi.jpg" alt="Jumat Berbagi" class="w-full h-full object-cover">
+          </div>
+        </article>
+
+        <article id="mengajar" class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold">Sosial Mengajar</h3>
+            <p class="text-sm text-slate-500 mt-2"><strong>Tujuan:</strong> Meningkatkan akses pendidikan bagi anak kurang mampu.</p>
+            <p class="mt-3 text-slate-600">Program mengajar mingguan dengan fokus pada literasi dan numerasi.</p>
+            <p class="mt-3"><strong>Ketua Pelaksana:</strong> -</p>
+          </div>
+          <div class="h-56 rounded-lg overflow-hidden">
+            <img src="assets/mengajar.jpeg" alt="Mengajar" class="w-full h-full object-cover">
+          </div>
+        </article>
+
+        <article id="ketua" class="bg-white rounded-2xl shadow p-6 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold">Forum Ketua</h3>
+            <p class="text-sm text-slate-500 mt-2"><strong>Tujuan:</strong> Menjadi jembatan komunikasi antara mahasiswa dan program studi.</p>
+            <p class="mt-3 text-slate-600">Wadah koordinasi yang mempertemukan seluruh ketua kelas dari setiap angkatan untuk menyampaikan aspirasi dan masukan ke prodi.</p>
+            <p class="mt-3"><strong>Ketua Pelaksana:</strong> -</p>
+          </div>
+          <div class="h-56 rounded-lg overflow-hidden">
+            <img src="assets/forum.jpg" alt="Forum Ketua" class="w-full h-full object-cover">
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Keunikan -->
+    <section class="bg-gray-50 py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold">Keunikan Departemen Sosial</h2>
+          <p class="text-slate-500 mt-2">Nilai-nilai yang membuat departemen sosial berbeda dan berdampak.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mx-auto">
+              <i class="fa-solid fa-hand-holding-heart text-blue-500 text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-center">Empati Tinggi</h3>
+            <p class="mt-2 text-slate-600 text-center">Setiap program berfokus pada kepedulian dan kebutuhan masyarakat secara mendalam.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <div class="w-14 h-14 bg-green-50 rounded-lg flex items-center justify-center mx-auto">
+              <i class="fa-solid fa-seedling text-green-500 text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-center">Program Berkelanjutan</h3>
+            <p class="mt-2 text-slate-600 text-center">Kegiatan dirancang untuk memberi dampak jangka panjang, bukan sekadar aksi sesaat.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+            <div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center mx-auto">
+              <i class="fa-solid fa-lightbulb text-purple-500 text-xl"></i>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-center">Inovatif & Kreatif</h3>
+            <p class="mt-2 text-slate-600 text-center">Terus mengembangkan ide baru untuk menyelesaikan masalah sosial secara efektif.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="max-w-6xl mx-auto px-6 py-16">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold">Contact</h2>
+        <p class="text-slate-500 mt-2">Hubungi kami untuk informasi event atau kolaborasi.</p>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="bg-white rounded-2xl shadow p-6 w-full sm:w-3/4 lg:w-2/3 text-center">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div class="flex items-center gap-3">
+              <i class="fa-brands fa-instagram text-2xl text-pink-600"></i>
+              <div class="text-left">
+                <div class="text-sm font-medium">Instagram</div>
+                <a href="https://www.instagram.com/coscial.lis/" class="text-sky-600">@coscial.lis</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <i class="fa-brands fa-whatsapp text-2xl text-green-600"></i>
+              <div class="text-left">
+                <div class="text-sm font-medium">WhatsApp</div>
+                <a href="https://wa.me/6287737666690" class="text-sky-600">0877-3766-6690</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-envelope text-2xl text-slate-700"></i>
+              <div class="text-left">
+                <div class="text-sm font-medium">Email</div>
+                <a href="mailto:departemensosial@example.com" class="text-sky-600">hmiftup@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-500 mt-6">Untuk kerja sama event, donasi, atau partisipasi program — langsung hubungi kami lewat salah satu kontak di atas.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-white border-t border-slate-100">
+      <div class="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-slate-500">
+        &copy; 2025 Departemen Sosial — Himpunan Mahasiswa Teknik Informatika. All rights reserved.
+      </div>
+    </footer>
+
   </main>
 
-  <section id="profil" class="container">
-    <h2 class="center">Profil Anggota</h2>
-    <p class="center muted">Anggota Departemen Sosial</p>
-
-    <!-- Koordinator (Rasyid) -->
-    <div class="profiles-single">
-      <div class="profile reveal">
-        <img src="assets/rasyid.jpg" alt="Ketua">
-        <h5>Rasyid Nafsyarie</h5>
-        <p>Koordinator Sosial</p>
-      </div>
-    </div>
-
-    <!-- anggota lainnya -->
-    <div class="profiles">
-      <div class="profile reveal"><img src="assets/rakha.jpg">
-        <h5>Rakha Yudhistira</h5>
-        <p>Staff Departemen Sosial</p>
-      </div>
-      <div class="profile reveal"><img src="assets/chilya.jpg">
-        <h5>Chilya Fadhilatin Nisa</h5>
-        <p>Staff Departemen Sosial</p>
-      </div>
-      <div class="profile reveal"><img src="assets/maruf.jpg">
-        <h5>Maruf Sarifudin</h5>
-        <p>Staff Departemen Sosial</p>
-      </div>
-      <div class="profile reveal"><img src="assets/fachri.jpg">
-        <h5>Muhammad Fachri Auravyano Saka</h5>
-        <p>Staff Departemen Sosial</p>
-      </div>
-      <div class="profile reveal"><img src="assets/chila.jpg">
-        <h5>Sheila Stephanie Anindya</h5>
-        <p>Staff Departemen Sosial</p>
-      </div>
-      <div class="profile reveal"><img src="assets/sinta.jpg">
-        <h5>Sinta Sintiani</h5>
-        <p>Staff Departemen Sosial</p>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="program" class="container">
-    <h2 class="center">Program Kerja</h2>
-    <p class="center muted">Ringkasan program kerja Divisi Sosial</p>
-
-    <div class="program-grid">
-      <!-- Cards -->
-      <div class="card reveal">
-        <h3>Donor Darah</h3>
-        <p>Menjalin kerja sama dengan PMI dan mengadakan kegiatan donor darah rutin.</p>
-        <div class="tag">Kegiatan Kemanusiaan</div>
-        <button class="btn" onclick="goToDetail('donor')">Lihat Detail</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Pengabdian Masyarakat</h3>
-        <p>Kegiatan pengabdian ke desa/komunitas: penyuluhan, perbaikan fasilitas, dan kerja bakti.</p>
-        <div class="tag">Sosial & Lingkungan</div>
-        <button class="btn" onclick="goToDetail('pengabdian')">Lihat Detail</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Ruang Tengah x Temu Alumni</h3>
-        <p>Program kolaborasi, ruang diskusi, dan temu alumni untuk jaringan serta sharing pengalaman.</p>
-        <div class="tag">Event & Jaringan</div>
-        <button class="btn" onclick="goToDetail('ruangtengah')">Lihat Detail</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Jumat Berbagi</h3>
-        <p>Berbagi paket sembako dan kebutuhan harian kepada warga sekitar setiap akhir pekan tertentu.</p>
-        <div class="tag">Distribusi Bantuan</div>
-        <button class="btn" onclick="goToDetail('jumat')">Lihat Detail</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Sosial Mengajar</h3>
-        <p>Program pengajaran anak-anak kurang mampu: literasi, numerasi, dan keterampilan sederhana.</p>
-        <div class="tag">Pendidikan</div>
-        <button class="btn" onclick="goToDetail('mengajar')">Lihat Detail</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Ultras Informatika</h3>
-        <p>Untuk meneruskan generasi Ultras Informatika</p>
-        <div class="tag">Sosial & Lingkungan</div>
-        <button class="btn" onclick="goToDetail('ultras')">Lihat Detail</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Forum Ketua</h3>
-        <p>Mengumpulkan aspirasi dari para ketua kelas disemua angkatan Mahasiswa aktif Teknik Informatika</p>
-        <div class="tag">Pendidikan</div>
-        <button class="btn" onclick="goToDetail('ketua')">Lihat Detail</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="details" class="container">
-    <h2 class="center">Detail Program Kerja</h2>
-    <p class="center muted">Penjelasan lengkap tiap program & penanggung jawab</p>
-
-    <!-- Detail: Donor -->
-    <article id="donor" class="program-detail reveal" data-order="1">
-      <div>
-        <h2>Donor Darah</h2>
-        <p class="small">Tujuan: Menyediakan stok darah yang aman & membentuk kepedulian donor dari civitas.</p>
-        <p style="margin-top:12px">Deskripsi: Donor Darah rutin yang bekerja sama dengan PMI. Kegiatan ini melibatkan
-          proses pendaftaran, pemeriksaan kesehatan dasar, dan pelaksanaan donor di lokasi kampus atau tempat kerja
-          sama.</p>
-        <p style="margin-top:12px"><strong>Ketua Pelaksana:</strong> Chilya Fadhilatin Nisa</p>
-      </div>
-      <div class="media"><img src="assets/donor.jpg"></div>
-    </article>
-
-    <!-- Detail: Pengabdian -->
-    <article id="pengabdian" class="program-detail reveal" data-order="2">
-      <div>
-        <h2>Pengabdian Masyarakat</h2>
-        <p class="small">Tujuan: Melaksanakan kegiatan yang mendukung kesejahteraan masyarakat setempat.</p>
-        <p style="margin-top:12px">Deskripsi: Pengabdian Masyarakat meliputi penyuluhan kesehatan, kerja bakti, renovasi
-          fasilitas umum, dan program pemberdayaan ekonomi.</p>
-        <p style="margin-top:12px"><strong>Ketua Pelaksana:</strong> Sheila Stephanie Anindya</p>
-      </div>
-      <div class="media"><img src="assets/pengmas.jpg"></div>
-    </article>
-
-    <!-- Detail: Ruang Tengah -->
-    <article id="ruangtengah" class="program-detail reveal" data-order="3">
-      <div>
-        <h2>Ruang Tengah x Temu Alumni</h2>
-        <p class="small">Tujuan: Menjalin relasi antara angkatan dan alumni melalui sesi diskusi & workshop.</p>
-        <p style="margin-top:12px">Deskripsi: Event gabungan yang menghadirkan alumni untuk berbagi pengalaman,
-          membangun mentorship, dan membuka peluang kolaborasi.</p>
-        <p style="margin-top:12px"><strong>Ketua Pelaksana:</strong> Maruf Sarifudin</p>
-      </div>
-      <div class="media"><img
-          src="https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-      </div>
-    </article>
-
-    <!-- Detail: Jumat Berbagi -->
-    <article id="jumat" class="program-detail reveal" data-order="4">
-      <div>
-        <h2>Jumat Berbagi</h2>
-        <p class="small">Tujuan: Menyediakan bantuan cepat kepada warga yang membutuhkan setiap periode tertentu.</p>
-        <p style="margin-top:12px">Deskripsi: Pembagian paket sembako, obat-obatan ringan, dan kebutuhan harian bersama
-          komunitas lokal.</p>
-        <p style="margin-top:12px"><strong>Ketua Pelaksana:</strong> -</p>
-      </div>
-      <div class="media"><img src="assets/berbagi.jpg"></div>
-    </article>
-
-    <!-- Detail: Sosial Mengajar -->
-    <article id="mengajar" class="program-detail reveal" data-order="5">
-      <div>
-        <h2>Sosial Mengajar</h2>
-        <p class="small">Tujuan: Meningkatkan akses pendidikan bagi anak kurang mampu.</p>
-        <p style="margin-top:12px">Deskripsi: Program mengajar untuk anak-anak di lingkungan sekolah, yang terfokus pada
-          literasi dan numerasi.</p>
-        <p style="margin-top:12px"><strong>Ketua Pelaksana:</strong> -</p>
-      </div>
-      <div class="media"><img src="assets/mengajar.jpeg"></div>
-    </article>
-    <article id="ketua" class="program-detail reveal" data-order="5">
-      <div>
-        <h2>Forum Ketua</h2>
-        <p class="small">Tujuan: Menjadi jembatan komunikasi antara mahasiswa dan program studi.</p>
-        <p style="margin-top:12px">Deskripsi: Program ini merupakan wadah koordinasi yang mempertemukan seluruh ketua
-          kelas dari setiap angkatan di Teknik Informatika. Melalui forum ini, para ketua kelas dapat menyampaikan
-          aspirasi, keluhan, kebutuhan, serta masukan mahasiswa kepada pihak program studi secara langsung dan
-          terstruktur. Kegiatan ini membantu menciptakan komunikasi yang lebih efektif dan menjaga keterhubungan antara
-          mahasiswa dan prodi.</p>
-        <p style="margin-top:12px"><strong>Ketua Pelaksana:</strong> -</p>
-      </div>
-      <div class="media"><img src="assets/forum.jpg"></div>
-    </article>
-
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="container" style="margin-top:36px">
-    <h2 class="center">Contact</h2>
-    <p class="center muted">Hubungi kami untuk informasi event atau kolaborasi.</p>
-
-    <div style="display:flex;justify-content:center;margin-top:18px;">
-      <div style="
-        max-width:720px;
-        width:100%;
-        text-align:center;
-        display:flex;
-        flex-direction:column;
-        gap:18px;
-      " class="card reveal">
-
-        <!-- Instagram -->
-        <p style="display:flex;align-items:center;justify-content:center;gap:10px;">
-          <i class="fab fa-instagram" style="font-size:20px;color:#E1306C;"></i>
-          <strong>Instagram:</strong>
-          <a href="https://www.instagram.com/coscial.lis/" class="color-links">@coscial.lis</a>
-        </p>
-
-        <!-- WhatsApp -->
-        <p style="display:flex;align-items:center;justify-content:center;gap:10px;">
-          <i class="fab fa-whatsapp" style="font-size:20px;color:#25D366;"></i>
-          <strong>Telepon:</strong>
-          <a href="https://wa.me/6287737666690" class="color-links">0877-3766-6690</a>
-        </p>
-
-      </div>
-    </div>
-  </section>
-
-
-  <footer>
-    &copy; 2025 Departemen Sosial — Himpunan Mahasiswa Teknik Informatika. All rights reserved.
-  </footer>
-  </main>
-
+  <!-- SCRIPTS -->
   <script>
-    // Smooth reveal using IntersectionObserver
+    // simple reveal (IntersectionObserver) for .reveal elements
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('show');
-      })
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        if (e.isIntersecting) {
+          e.target.classList.add('opacity-100', 'translate-y-0');
+          e.target.classList.remove('opacity-0', 'translate-y-6');
+        }
+      });
+    }, { threshold: 0.14 });
 
-    // Program card to detail navigation
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.classList.add('opacity-0', 'translate-y-6', 'transition', 'duration-600');
+      io.observe(el);
+    });
+
+    // scroll to detail and highlight
     function goToDetail(id) {
       const el = document.getElementById(id);
       if (!el) return;
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // briefly highlight
-      el.style.transition = 'box-shadow .45s ease';
-      el.style.boxShadow = '0 18px 50px rgba(52,132,255,0.12)';
-      setTimeout(() => el.style.boxShadow = '', 900);
+      el.classList.add('ring', 'ring-sky-300');
+      setTimeout(() => el.classList.remove('ring', 'ring-sky-300'), 900);
     }
 
-    // Optional: change hero background via CSS variable (easy to customize)
-    // document.documentElement.style.setProperty('--hero-img', "url('path/to/your-image.jpg')");
-
-    // Keyboard navigation for detail sections: Arrow Down/Up to move between details
-    const detailSections = Array.from(document.querySelectorAll('#details .program-detail'));
-    let currentIndex = -1;
-    document.addEventListener('keydown', (e) => {
-      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
-        e.preventDefault();
-        if (detailSections.length === 0) return;
-        if (e.key === 'ArrowDown') currentIndex = Math.min(currentIndex + 1, detailSections.length - 1);
-        if (e.key === 'ArrowUp') currentIndex = Math.max(currentIndex - 1, 0);
-        if (currentIndex < 0) currentIndex = 0;
-        detailSections[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-
-    // small: ensure hash links smooth
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (ev) => {
-        const href = a.getAttribute('href');
-        const t = document.querySelector(href);
-        if (t) { ev.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    // Pause slider animation on hover / touch
+    const track = document.querySelector('.slider-track');
+    if (track) {
+      ['mouseenter','focusin'].forEach(ev => {
+        track.addEventListener(ev, () => track.style.animationPlayState = 'paused');
       });
-    });
+      ['mouseleave','focusout'].forEach(ev => {
+        track.addEventListener(ev, () => track.style.animationPlayState = 'running');
+      });
+
+      // add simple swipe support for mobile: stop animation while swiping
+      let startX = 0;
+      track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        track.style.animationPlayState = 'paused';
+      }, {passive:true});
+      track.addEventListener('touchend', e => {
+        track.style.animationPlayState = 'running';
+      });
+    }
+
+    // Fix for full-width hero: recalc duplicate width to be exactly 100vw each on resize
+    function setSlideWidths() {
+      document.querySelectorAll('.slide-item').forEach(img => {
+        img.style.width = window.innerWidth + 'px';
+      });
+    }
+    setSlideWidths();
+    window.addEventListener('resize', setSlideWidths);
   </script>
 </body>
-
 </html>
